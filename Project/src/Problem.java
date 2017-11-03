@@ -1,4 +1,4 @@
-package be.kul.gantry.domain;
+//package be.kul.gantry.domain;
 
 
 
@@ -30,6 +30,13 @@ public class Problem {
     private final List<Slot> slots;
     private final int safetyDistance;
     private final int pickupPlaceDuration;
+    
+    
+    //datastructuren voor de oplossing.
+    
+    //XZY-->volgorde van aangesproken te worden.
+    ArrayList<XList> al=new ArrayList<XList>();
+    
 
     public Problem(int minX, int maxX, int minY, int maxY, int maxLevels,
                    List<Item> items, List<Gantry> gantries, List<Slot> slots,

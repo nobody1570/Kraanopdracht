@@ -1,4 +1,4 @@
-package be.kul.gantry.domain;
+//package be.kul.gantry.domain;
 
 /**
  * Created by Wim on 27/04/2015.

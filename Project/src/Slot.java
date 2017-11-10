@@ -1,17 +1,9 @@
-package be.kul.gantry.domain;
-
-<<<<<<< HEAD
-public class Slot implements Comparable{
-=======
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-/**
- * Created by Wim on 27/04/2015.
- */
-public class Slot {
->>>>>>> fed119f9a6bab743b2ff5f9ae2ce4feb549d01a2
+
+
+public class Slot implements Comparable{
 
     private final int id;
     private final int centerX, centerY, z;
@@ -93,11 +85,7 @@ public class Slot {
 		return "Slot [id=" + id + ", centerX=" + centerX + ", centerY=" + centerY + ", z=" + z + ", item=" + item + "]";
 	}
 	
-	
-    
-    
 
-    
     
 
 }

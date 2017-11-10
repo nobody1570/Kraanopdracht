@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -12,7 +13,7 @@ public class CoordinateList<E> extends ArrayList<E> implements Comparable{
 	private static final long serialVersionUID = 1L;
 
 	//bevat lists van Nodes op hoogte z voor coördinaat x
-	ArrayList<ArrayList<Node>> al;
+	
 	
 	int coordinaat;
 	int placeInUpperList;
@@ -28,7 +29,7 @@ public class CoordinateList<E> extends ArrayList<E> implements Comparable{
 	public int getCoordinaat() {
 		return coordinaat;
 	}
-	public void setCoordinaat(int xCoordinaat) {
+	public void setCoordinaat(int coordinaat) {
 		this.coordinaat = coordinaat;
 	}
 	
@@ -59,6 +60,10 @@ public class CoordinateList<E> extends ArrayList<E> implements Comparable{
 		
 		CoordinateList l=(CoordinateList)o;
 		return coordinaat-l.coordinaat;
+	}
+	@Override
+	public String toString() {
+		return "--> x=" + coordinaat + super.toString();
 	}
 	
 	

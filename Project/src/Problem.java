@@ -353,7 +353,9 @@ public class Problem {
     					 
     					 xList.add(slot);
     					 found =true;
-    				 
+    					 xList.sort(null);
+    					
+    					 
     				 }
     			 }
     			 
@@ -361,6 +363,7 @@ public class Problem {
     				 
     				 CoordinateList<Slot> list= new  CoordinateList<Slot>();
     				 
+    				 list.setCoordinaat(x);
     				 list.add(slot);
     				 field.add(list);
     				 field.sort(null);
@@ -399,7 +402,7 @@ public class Problem {
     	 
     	 
     	 
-    	 
+    	 System.out.println(field);
     	 
     	
     }
@@ -408,7 +411,8 @@ public class Problem {
     	
     	
     	
-    }
+    
+   }
 
 
 }

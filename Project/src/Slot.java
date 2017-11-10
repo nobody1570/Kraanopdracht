@@ -1,5 +1,5 @@
 
-public class Slot {
+public class Slot implements Comparable{
 
     private final int id;
     private final int centerX, centerY, z;
@@ -66,4 +66,20 @@ public class Slot {
         OUTPUT,
         STORAGE
     }
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		Slot s=(Slot) o;
+		return centerY-s.centerY;
+	}
+
+	@Override
+	public String toString() {
+		return "Slot [id=" + id + ", centerX=" + centerX + ", centerY=" + centerY + ", z=" + z + ", item=" + item + "]";
+	}
+	
+	
+    
+    
 }

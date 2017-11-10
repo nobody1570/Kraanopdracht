@@ -1,4 +1,4 @@
-//package be.kul.gantry.domain;
+package be.kul.gantry.domain;
 
 
 
@@ -30,17 +30,12 @@ public class Problem {
     private final List<Slot> slots;
     private final int safetyDistance;
     private final int pickupPlaceDuration;
-    
-    
-    //datastructuren voor de oplossing.
-    
-    //XZY-->volgorde van aangesproken te worden.
-    ArrayList<XList> al=new ArrayList<XList>();
-    
+    private static HashMap<Integer, Slot> map = new HashMap<>(20000);
+
 
     public Problem(int minX, int maxX, int minY, int maxY, int maxLevels,
                    List<Item> items, List<Gantry> gantries, List<Slot> slots,
-                   List<Job> inputJobSequence, List<Job> outputJobSequence, int gantrySafetyDist, int pickupPlaceDuration) {
+                   List<Job> inputJobSequence, List<Job> outputJobSequence, int gantrySafetyDist, int pickupPlaceDuration, HashMap<Integer, Slot> map) {
         this.minX = minX;
         this.maxX = maxX;
         this.minY = minY;
@@ -53,6 +48,7 @@ public class Problem {
         this.outputJobSequence = new ArrayList<>(outputJobSequence);
         this.safetyDistance = gantrySafetyDist;
         this.pickupPlaceDuration = pickupPlaceDuration;
+        this.map = map;
     }
 
     public int getMinX() {
@@ -242,6 +238,10 @@ public class Problem {
                 Item c = itemId == null ? null : itemList.get(itemId);
 
                 Slot s = new Slot(id,cx,cy,minX,maxX,minY,maxY,z,type,c);
+                if (itemId==null){
+                } else {
+                    map.put(itemId, s);
+                }
                 slotList.add(s);
             }
 
@@ -282,7 +282,7 @@ public class Problem {
                 int iid = ((Long) outputJob.get("itemId")).intValue();
                 int sid = ((Long) outputJob.get("toId")).intValue();
 
-                Job job = new Job(jid++,itemList.get(iid),slotList.get(sid),null);
+                Job job = new Job(jid++,itemList.get(iid),null,slotList.get(sid));
                 outputJobList.add(job);
             }
 
@@ -299,12 +299,25 @@ public class Problem {
                     inputJobList,
                     outputJobList,
                     safetyDist,
-                    pickupPlaceDuration);
+                    pickupPlaceDuration,
+                    map);
 
         }
 
     }
 
-
+    /*
+    methode om de verbanden tussen de verschillende slots te leggen.
+    we kunnen hiervoor een
+    */
+    public void makeTree(){
+        for (Slot slot : slots){
+            for (Slot temp : slots){
+                if (slot.getZ() == temp.getZ() + 1){
+                    slot.compare(temp);
+                }
+            }
+        }
+    }
 
 }

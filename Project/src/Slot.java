@@ -1,8 +1,4 @@
-package be.kul.gantry.domain;
 
-/**
- * Created by Wim on 27/04/2015.
- */
 public class Slot {
 
     private final int id;

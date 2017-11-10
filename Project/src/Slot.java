@@ -1,4 +1,4 @@
-//package be.kul.gantry.domain;
+package be.kul.gantry.domain;
 
 /**
  * Created by Wim on 27/04/2015.
@@ -6,18 +6,16 @@
 public class Slot {
 
     private final int id;
-    private final int centerX, centerY, xMin, xMax, yMin, yMax,z;
+    private final int centerX, centerY, z;
     private Item item;
     private final SlotType type;
+    private Interval interval;
 
     public Slot(int id, int centerX, int centerY, int xMin, int xMax, int yMin, int yMax, int z, SlotType type, Item item) {
         this.id = id;
         this.centerX = centerX;
         this.centerY = centerY;
-        this.xMin = xMin;
-        this.xMax = xMax;
-        this.yMin = yMin;
-        this.yMax = yMax;
+        this.interval = new Interval(xMin, xMax, yMin, yMax);
         this.z = z;
         this.item = item;
         this.type = type;
@@ -40,19 +38,19 @@ public class Slot {
     }
 
     public int getXMin() {
-        return xMin;
+        return interval.xMin;
     }
 
     public int getXMax() {
-        return xMax;
+        return interval.xMax;
     }
 
     public int getYMin() {
-        return yMin;
+        return interval.yMin;
     }
 
     public int getYMax() {
-        return yMax;
+        return interval.yMax;
     }
 
     public Item getItem() {

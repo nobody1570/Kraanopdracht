@@ -1,11 +1,25 @@
+package be.kul.gantry.domain;
 
+<<<<<<< HEAD
 public class Slot implements Comparable{
+=======
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * Created by Wim on 27/04/2015.
+ */
+public class Slot {
+>>>>>>> fed119f9a6bab743b2ff5f9ae2ce4feb549d01a2
 
     private final int id;
     private final int centerX, centerY, z;
     private Item item;
     private final SlotType type;
     private Interval interval;
+    private List<Slot> parents;
+    private List<Slot> childeren;
 
     public Slot(int id, int centerX, int centerY, int xMin, int xMax, int yMin, int yMax, int z, SlotType type, Item item) {
         this.id = id;
@@ -15,6 +29,8 @@ public class Slot implements Comparable{
         this.z = z;
         this.item = item;
         this.type = type;
+        parents = new ArrayList<>();
+        childeren = new ArrayList<>();
     }
 
     public int getId() {
@@ -33,21 +49,6 @@ public class Slot implements Comparable{
         return z;
     }
 
-    public int getXMin() {
-        return interval.xMin;
-    }
-
-    public int getXMax() {
-        return interval.xMax;
-    }
-
-    public int getYMin() {
-        return interval.yMin;
-    }
-
-    public int getYMax() {
-        return interval.yMax;
-    }
 
     public Item getItem() {
         return item;
@@ -60,6 +61,8 @@ public class Slot implements Comparable{
     public SlotType getType() {
         return type;
     }
+    
+   
 
     public static enum SlotType {
         INPUT,
@@ -67,6 +70,17 @@ public class Slot implements Comparable{
         STORAGE
     }
 
+    public void addParent(Slot slot){
+        parents.add(slot);
+    }
+    
+    public void addChild(Slot slot){
+        childeren.add(slot);
+    }
+    
+    public boolean compare(Slot slot){
+        return this.interval.compare(slot.interval);
+    }
 	@Override
 	public int compareTo(Object o) {
 		// TODO Auto-generated method stub
@@ -82,4 +96,8 @@ public class Slot implements Comparable{
 	
     
     
+
+    
+    
+
 }

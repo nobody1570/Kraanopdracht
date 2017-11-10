@@ -56,11 +56,7 @@ public class Slot implements Comparable{
     
    
 
-    public static enum SlotType {
-        INPUT,
-        OUTPUT,
-        STORAGE
-    }
+   
 
     public void addParent(Slot slot){
         parents.add(slot);
@@ -77,7 +73,7 @@ public class Slot implements Comparable{
 	public int compareTo(Object o) {
 		// TODO Auto-generated method stub
 		Slot s=(Slot) o;
-		return centerY-s.centerY;
+		return z-s.z;
 	}
 
 	@Override
@@ -85,6 +81,12 @@ public class Slot implements Comparable{
 		return "Slot [id=" + id + ", centerX=" + centerX + ", centerY=" + centerY + ", z=" + z + ", item=" + item + "]";
 	}
 	
+ public static enum SlotType {
+        INPUT,
+        OUTPUT,
+        STORAGE
+    }
+
 
     
 

@@ -63,7 +63,7 @@ public class CoordinateList<E> extends ArrayList<E> implements Comparable{
 	}
 	@Override
 	public String toString() {
-		return "--> x=" + coordinaat + super.toString();
+		return "--> coord=" + coordinaat + super.toString();
 	}
 	
 	

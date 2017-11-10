@@ -125,10 +125,10 @@ public class Problem {
             jo.put("id",slot.getId());
             jo.put("cx",slot.getCenterX());
             jo.put("cy",slot.getCenterY());
-            jo.put("minX",slot.getXMin());
-            jo.put("maxX",slot.getXMax());
-            jo.put("minY",slot.getYMin());
-            jo.put("maxY",slot.getYMax());
+           // jo.put("minX",slot.getXMin());
+          //  jo.put("maxX",slot.getXMax());
+            //jo.put("minY",slot.getYMin());
+            //jo.put("maxY",slot.getYMax());
             jo.put("z",slot.getZ());
             jo.put("type",slot.getType().name());
             jo.put("itemId",slot.getItem() == null ? null : slot.getItem().getId());
@@ -322,7 +322,7 @@ public class Problem {
  //voor effectief op te lossen hieronder.
     
     //x,y
-    List <CoordinateList<Slot>> field;
+    List <CoordinateList<CoordinateList<Slot>>> field;
     
     
     Slot input;
@@ -331,7 +331,7 @@ public class Problem {
     
     public void prepareSolve() {
     	
-    	 field=new ArrayList<CoordinateList<Slot>>();
+    	 field=new ArrayList<CoordinateList<CoordinateList<Slot>>>();
     	 
     	 
     	 for(Slot slot:slots) {
@@ -344,27 +344,58 @@ public class Problem {
     			 //slot plaatsen
     			 
     			 int x=slot.getCenterX();
+    			 int y=slot.getCenterY();
     			 
-    			 boolean found=false;
+    			 boolean foundx=false;
+    			 boolean foundy=false;
     			 
-    			 for(CoordinateList<Slot> xList: field) {
+    			 for(CoordinateList<CoordinateList<Slot>> xList: field) {
     				 
     				 if(xList.getCoordinaat()==x) {
+    					 foundx =true;
+    					 for(CoordinateList<Slot> yList: xList) {
+    						 
+    						 if(yList.getCoordinaat()==y) {
+    							 
+    							 foundy=true;
+    							 yList.add(slot);
+    							 yList.sort(null);
+    							 
+    							 
+    						 }
+    						 
+    					 }
     					 
-    					 xList.add(slot);
-    					 found =true;
-    					 xList.sort(null);
+    					 if(foundx&&!foundy) {
+    						 
+    						 
+    						 CoordinateList<Slot> listY= new  CoordinateList<Slot>();
+    						 listY.add(slot);
+    						 listY.setCoordinaat(y);
+    						 xList.add(listY);
+    						 xList.sort(null);
+    						 
+    						 for(int i=0;i<xList.size();i++) {
+    	    					 
+    	    					 xList.get(i).setPlaceInUpperList(i);
+    	    				 }
+    						 
+    					 }
+    					 
+    					 
     					
     					 
     				 }
     			 }
     			 
-    			 if(!found) {
+    			 if(!foundx) {
     				 
-    				 CoordinateList<Slot> list= new  CoordinateList<Slot>();
-    				 
+    				 CoordinateList<CoordinateList<Slot>> list= new  CoordinateList<CoordinateList<Slot>>();
+    				 CoordinateList<Slot> yList=new CoordinateList<Slot>();
     				 list.setCoordinaat(x);
-    				 list.add(slot);
+    				 yList.setCoordinaat(y);
+    				 yList.add(slot);
+    				 list.add(yList);
     				 field.add(list);
     				 field.sort(null);
     				 

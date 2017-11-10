@@ -1,4 +1,4 @@
-package be.kul.gantry.domain;
+
 
 public class Interval {
 

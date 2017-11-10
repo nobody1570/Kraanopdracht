@@ -35,7 +35,7 @@ public class Problem {
     //datastructuren voor de oplossing.
     
     //XZY-->volgorde van aangesproken te worden.
-    ArrayList<XList> al=new ArrayList<XList>();
+    ArrayList<CoordinateList> al=new ArrayList<CoordinateList>();
     
 
     public Problem(int minX, int maxX, int minY, int maxY, int maxLevels,
@@ -237,6 +237,7 @@ public class Problem {
                 overallMinY = Math.min(overallMinY,minY);
                 overallMaxY = Math.max(overallMaxY,maxY);
 
+                
                 Slot.SlotType type = Slot.SlotType.valueOf((String)slot.get("type"));
                 Integer itemId = slot.get("itemId") == null ? null : ((Long)slot.get("itemId")).intValue();
                 Item c = itemId == null ? null : itemList.get(itemId);
@@ -303,6 +304,97 @@ public class Problem {
 
         }
 
+    }
+    
+    //voor effectief op te lossen hieronder.
+    
+    //x,y
+    List <CoordinateList<Slot>> field;
+    
+    
+    Slot input;
+    Slot output;
+   
+    
+    public void prepareSolve() {
+    	
+    	 field=new ArrayList<CoordinateList<Slot>>();
+    	 
+    	 
+    	 for(Slot slot:slots) {
+    		 if(slot.getType().equals(Slot.SlotType.STORAGE)) {
+    			 
+    			 //slot opslaan
+    			 
+    			
+    			 
+    			 //slot plaatsen
+    			 
+    			 int x=slot.getCenterX();
+    			 
+    			 boolean found=false;
+    			 
+    			 for(CoordinateList<Slot> xList: field) {
+    				 
+    				 if(xList.getCoordinaat()==x) {
+    					 
+    					 xList.add(slot);
+    					 found =true;
+    				 
+    				 }
+    			 }
+    			 
+    			 if(!found) {
+    				 
+    				 CoordinateList<Slot> list= new  CoordinateList<Slot>();
+    				 
+    				 list.add(slot);
+    				 field.add(list);
+    				 field.sort(null);
+    				 
+    				 for(int i=0;i<field.size();i++) {
+    					 
+    					 field.get(i).setPlaceInUpperList(i);
+    				 }
+    				 
+    			 }
+    			 
+    			 
+    			 
+    			 
+    			 
+    			 
+    		 }else
+    		 
+    			 if(slot.getType().equals(Slot.SlotType.INPUT)) {
+    				 
+    				 input=slot;
+    			 
+    			 
+    		 }else
+    		 
+    			 	if(slot.getType().equals(Slot.SlotType.OUTPUT)) {
+    				 
+    				 output=slot;
+    			 
+    		 }
+    		 
+    		 
+    		 
+    		 
+    	 }
+    	 
+    	 
+    	 
+    	 
+    	 
+    	
+    }
+    
+    public void solve() {
+    	
+    	
+    	
     }
 
 

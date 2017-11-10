@@ -1,4 +1,12 @@
+package be.kul.gantry.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * Created by Wim on 27/04/2015.
+ */
 public class Slot {
 
     private final int id;
@@ -6,6 +14,8 @@ public class Slot {
     private Item item;
     private final SlotType type;
     private Interval interval;
+    private List<Slot> parents;
+    private List<Slot> childeren;
 
     public Slot(int id, int centerX, int centerY, int xMin, int xMax, int yMin, int yMax, int z, SlotType type, Item item) {
         this.id = id;
@@ -15,6 +25,8 @@ public class Slot {
         this.z = z;
         this.item = item;
         this.type = type;
+        parents = new ArrayList<>();
+        childeren = new ArrayList<>();
     }
 
     public int getId() {
@@ -60,10 +72,22 @@ public class Slot {
     public SlotType getType() {
         return type;
     }
+    
+    public boolean compare(Slot slot){
+        return this.interval.compare(slot.interval);
+    }
 
     public static enum SlotType {
         INPUT,
         OUTPUT,
         STORAGE
+    }
+    
+    public void addParent(Slot slot){
+        parents.add(slot);
+    }
+    
+    public void addChild(Slot slot){
+        childeren.add(slot);
     }
 }

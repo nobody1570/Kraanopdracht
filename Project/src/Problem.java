@@ -467,6 +467,8 @@ public class Problem {
 	}
 	
 	
+	//hasItemsAbove returns true if the item has an item above it.
+	//--> if false item can be taken
 	boolean hasItemsAbove(Item item) {
 		boolean above=false;
 		
@@ -503,7 +505,7 @@ public class Problem {
 		int maxZ=zRow.get(maxZposition).getZ();
 		
 		
-		if(z == maxZ)above = true;
+		if(z == maxZ)above = false;
 		else {
 			
 			int position=0;

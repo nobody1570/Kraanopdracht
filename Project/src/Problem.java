@@ -416,10 +416,14 @@ public class Problem {
 
 				// check if possible
 				Boolean possible = false;
+				
+				//item in field?
+				//possible=itemPositions.containsKey(job.getItem());
 
-				if (possible = true) {
+				if (possible) {
 
 					// move to output
+					
 
 					outputJobSequence.remove(job);
 

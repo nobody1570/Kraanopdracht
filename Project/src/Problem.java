@@ -321,9 +321,12 @@ public class Problem {
     
  //voor effectief op te lossen hieronder.
     
+    //houdt ruimtelijke positie slots bij
     //x,y
     List <CoordinateList<CoordinateList<Slot>>> field;
     
+    //houdt voor alle items bij in welke slots ze zitten (behalve voor input en output)
+    HashMap<Item,Slot> itemPositions=new HashMap<Item, Slot>();
     
     Slot input;
     Slot output;
@@ -338,8 +341,13 @@ public class Problem {
     		 if(slot.getType().equals(Slot.SlotType.STORAGE)) {
     			 
     			 //slot opslaan
+    			 //als er een item in zit.
     			 
-    			
+    			 if(slot.getItem()!=null) {
+    				 
+    				 itemPositions.put(slot.getItem(), slot);
+    				 
+    			 }
     			 
     			 //slot plaatsen
     			 
@@ -433,8 +441,8 @@ public class Problem {
     	 
     	 
     	 
-    	 System.out.println(field);
-    	 
+    	// System.out.println(field);
+    	 //System.out.println(itemPositions);
     	
     }
     

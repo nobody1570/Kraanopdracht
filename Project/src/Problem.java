@@ -428,8 +428,17 @@ public class Problem {
 		//loop in comment om oeindige loop te voorkomen
 		//while (outputJobSequence.size() > 0) {
 
-			for (Job job : outputJobSequence) {
-
+		Boolean changed=true;
+		
+		
+		//move items who can be grabbed without moving other items to output
+		while(changed) {
+			changed =false;
+			
+			
+			for (int i=0;i<outputJobSequence.size();i++) {
+				
+				Job job=outputJobSequence.get(i);
 				// check if possible
 				Boolean possible = false;
 				
@@ -438,30 +447,111 @@ public class Problem {
 
 				if (possible) {
 
-					// move to output
+					if(!hasItemsAbove(job.getItem())) {
+						
+						// move to output
+						outputJobSequence.remove(job);
+						changed=true;
+						i--;
+						
+					}
 					
-
-					outputJobSequence.remove(job);
+								
 
 				}
 
 			}
+	}
+			
+		for (int i=0;i<outputJobSequence.size();i++) {
+			
+			Job job=outputJobSequence.get(i);
+			
+			
+			// check if possible
+			Boolean possible = false;
+			
+			//item in field?
+			//possible=itemPositions.containsKey(job.getItem());
+
+			if (possible) {
+
+				if(hasItemsAbove(job.getItem())) {
+					//put the items above the wanted item somewhere else
+					
+					
+					// move to output
+					outputJobSequence.remove(job);
+					i--;
+					
+					
+				}else {
+					//voor de zekerhzid, er kan al iets vrij zijn geraakt.
+					
+					
+					// move to output
+					outputJobSequence.remove(job);
+					i--;
+					
+					
+					
+				}
+				
+							
+
+			}
+
+		}
 
 			// eventueel 1/meerdere jobs binnenbrengen
 			
 			//-->rest van de outputjobs checken om te zien welke items zij nodig hebben
 			//----->1 van deze items binnenbrengen
 
-		//}
+		ArrayList<Item>neededItems=new ArrayList<Item>();
+		for (Job job : outputJobSequence) {
+			
+			neededItems.add(job.getItem());
+			
+		}
+		
+		
+		if(neededItems.size()>0) {
+			for(int i=0;i<neededItems.size();i++) {
+				for (int j=0;j<inputJobSequence.size();j++) {
+					
+					Job job=inputJobSequence.get(j);
 
+				if(job.getItem().getId()==neededItems.get(i).getId()) {
+					
+					//move from input to output
+					
+					inputJobSequence.remove(job);
+					j--;
+					
+				}
+
+			}
+			
+		}
+		}
+		
+		//}
+		//
+		//
+//
 		// rest van de inputjobs voltooien
 
-		for (Job job : inputJobSequence) {
+		for (int j=0;j<inputJobSequence.size();j++) {
+			
+			Job job=inputJobSequence.get(j);
 
 			// move from input to position
 			
 			//remove job from inputjobs.
 
+			inputJobSequence.remove(job);
+			j--;
 		}
 
 	}

@@ -65,9 +65,23 @@ public class Job {
         public TaskType getType() {
             return type;
         }
+
+		@Override
+		public String toString() {
+			return "Task [id=" + id + ", slot=" + slot + ", type=" + type + "]";
+		}
+        
+        
     }
 
-    public static enum TaskType {
+    
+    @Override
+	public String toString() {
+		return "Job [id=" + id + ", pickup=" + pickup + ", place=" + place + ", item=" + item + "]";
+	}
+
+
+	public static enum TaskType {
         PICKUP,
         PLACE
     }

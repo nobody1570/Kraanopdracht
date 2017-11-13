@@ -446,12 +446,19 @@ public class Problem {
     	
     }
     
+    
+   
+    
     public void solve() {
     	
+    	//not yet implemented
     	
-    	
-    
+    	//while(true) {}
+    	System.out.println(inputJobSequence);
+    	System.out.println(outputJobSequence);
    }
+    
+   
 
 
 }

@@ -81,6 +81,8 @@ public class Slot implements Comparable{
 		return "Slot [id=" + id + ", centerX=" + centerX + ", centerY=" + centerY + ", z=" + z + ", item=" + item + "]";
 	}
 	
+	
+	
  public static enum SlotType {
         INPUT,
         OUTPUT,

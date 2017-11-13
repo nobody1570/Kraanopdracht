@@ -298,7 +298,7 @@ public class Problem {
 	// voor effectief op te lossen hieronder.
 
 	// houdt ruimtelijke positie slots bij
-	// x,y
+	// x,y,z
 	List<CoordinateList<CoordinateList<Slot>>> field;
 
 	// houdt voor alle items bij in welke slots ze zitten (behalve voor input en
@@ -407,10 +407,26 @@ public class Problem {
 
 	public void solve() {
 
+		
+		
+		/*
+		 * 
+		 * code gebruikt om hasItemsAbove uit te testen-->werkt!
+		for(Item i:itemPositions.keySet()) {
+			
+			
+			System.out.println(i.getId()+" "+hasItemsAbove(i));
+			
+			
+		}
+		*/
+		
 		// not yet implemented
 		// System.out.println(inputJobSequence);
 		// System.out.println(outputJobSequence);
-		while (outputJobSequence.size() > 0) {
+		
+		//loop in comment om oeindige loop te voorkomen
+		//while (outputJobSequence.size() > 0) {
 
 			for (Job job : outputJobSequence) {
 
@@ -436,7 +452,7 @@ public class Problem {
 			//-->rest van de outputjobs checken om te zien welke items zij nodig hebben
 			//----->1 van deze items binnenbrengen
 
-		}
+		//}
 
 		// rest van de inputjobs voltooien
 
@@ -449,5 +465,65 @@ public class Problem {
 		}
 
 	}
+	
+	
+	boolean hasItemsAbove(Item item) {
+		boolean above=false;
+		
+		Slot s= itemPositions.get(item);
+		
+		int x=s.getCenterX();
+		int y=s.getCenterY();
+		int z=s.getZ();
+		
+		CoordinateList <CoordinateList<Slot>> yRow = null;
+		CoordinateList<Slot> zRow = null;
+		for(CoordinateList <CoordinateList<Slot>> row:field) {
+			
+			if(row.getCoordinaat()==x) {
+				
+				yRow=row;
+				break;
+			}
+			
+		}
+		
+		for(CoordinateList<Slot> row:yRow) {
+			
+			if(row.getCoordinaat()==y) {
+				
+				zRow=row;
+				break;
+			}
+			
+		}
+		
+		System.out.println(zRow);
+		int maxZposition=zRow.size()-1;
+		int maxZ=zRow.get(maxZposition).getZ();
+		
+		
+		if(z == maxZ)above = true;
+		else {
+			
+			int position=0;
+			for(int i=0;i<maxZ;i++) {
+				
+				if(zRow.get(i).getId()==s.getId()) {
+					position=i;
+					break;
+				}
+			}
+			
+			
+			above=zRow.get(position+1).getItem()!=null;
+			
+		}
+		
+		
+		return above;
+	}
+	
+	
 
 }

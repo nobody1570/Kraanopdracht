@@ -407,6 +407,7 @@ public class Problem {
 
 	
 	int inputJob=0,outputJob=0;
+	double time=0;
 	public void solve() {
 
 		
@@ -484,7 +485,7 @@ public class Problem {
 		while(inputJob<inputJobSequence.size()) {
 			//een item binnenbrengen
 			
-			
+			putInFieldFromInput(inputJobSequence.get(inputJob).getItem());
 			inputJob++;
 			
 			
@@ -512,6 +513,11 @@ public class Problem {
 
 	private void moveToOutput(Item i) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	private void printMovement(int gantryID,int x,int y, Item item) {
+		
 		
 	}
 

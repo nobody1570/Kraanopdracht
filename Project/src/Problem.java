@@ -436,7 +436,7 @@ public class Problem {
 				if(!hasItemsAbove(i)) {
 					
 					//move i to output
-					
+					moveToOutput(i);
 					
 					outputJob++;
 					
@@ -444,8 +444,10 @@ public class Problem {
 					
 					//place items above i somewhere else
 					
-					//move i to output
+					moveItemsAbove(i);
 					
+					//move i to output
+					moveToOutput(i);
 					
 					
 					outputJob++;
@@ -459,13 +461,15 @@ public class Problem {
 				//als volgende input gelijk is aan nodige output
 				if(inputJobSequence.get(inputJob).getItem().getId()==i.getId()) {
 					//move i from input to output
-					
+					moveFromInputToOutput(i);
 					
 					inputJob++;
 					outputJob++;
 					
 				}else {
 					//het item binnenbrengen
+					
+					putInFieldFromInput(inputJobSequence.get(inputJob).getItem());
 					
 					inputJob++;
 				}
@@ -491,6 +495,26 @@ public class Problem {
 	}
 	
 	
+	private void moveItemsAbove(Item i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void putInFieldFromInput(Item item) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void moveFromInputToOutput(Item i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void moveToOutput(Item i) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	//hasItemsAbove returns true if the item has an item above it.
 	//--> if false item can be taken
 	boolean hasItemsAbove(Item item) {
